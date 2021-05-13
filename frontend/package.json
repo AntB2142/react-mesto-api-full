@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./build/* antbur@130.193.48.12:/home/antbur/react-mesto-api-full/frontend"
+    "deploy": "npm run build && scp -r ./build/* antbur@130.193.48.12:/home/antbur/react-mesto-api-full/frontend/build"
   },
   "eslintConfig": {
     "extends": [
