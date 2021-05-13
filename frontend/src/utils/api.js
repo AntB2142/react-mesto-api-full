@@ -108,9 +108,9 @@ class Api {
     }
 }
 export const api = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-20/',
+    url: 'https://api.mesto-react.nomoredomains.monster/',
     headers: {
-        authorization: '485f0781-93d2-4545-87ad-d84942ee0ff3',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
     }
 });

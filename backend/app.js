@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
+require('dotenv').config();
 const NotFoundError = require('./errors/NotFoundError');
+
 const {
   createUser,
   login,
@@ -19,9 +22,34 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
+const whitelist = [
+  'http://localhost:3000',
+  'https://mesto-react.nomoredomains.monster',
+  'http://mesto-react.nomoredomains.monster',
+];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', loginValidation, login);
 app.post('/signup', userValidation, createUser);

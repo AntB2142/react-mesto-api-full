@@ -14,6 +14,7 @@ class Auth {
         return fetch(`${this._url}/signin`, {
             method: 'POST',
             headers: {
+              'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({password, email})
@@ -25,6 +26,7 @@ class Auth {
         return fetch(`${this._url}/signup`, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({password, email})
@@ -36,6 +38,7 @@ class Auth {
       return fetch(`${this._url}/users/me`, { 
         method: 'GET', 
         headers: { 
+          'Accept': 'application/json',
           'Content-Type': 'application/json', 
           "Authorization": `Bearer ${token}` 
         }, 
@@ -47,6 +50,6 @@ class Auth {
     } 
 };
 
-const auth = new Auth('https://auth.nomoreparties.co');
+const auth = new Auth('http://api.mesto-react.nomoredomains.monster');
 
 export default auth;
