@@ -15,10 +15,17 @@ class Auth {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                
             },
             body: JSON.stringify({password, email})
         })
         .then((res) => this._checkResponse(res))
+        .then((data) => {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+            return data.token;
+          }
+        })
     };
 
     register(password, email) {
