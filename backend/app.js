@@ -1,17 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
-require('dotenv').config();
 const NotFoundError = require('./errors/NotFoundError');
-
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const {
   createUser,
   login,
 } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { userValidation, loginValidation } = require('./middlewares/validation');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -24,8 +23,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 const whitelist = [
   'http://localhost:3000',
-  'https://mesto-react.nomoredomains.monster',
-  'http://mesto-react.nomoredomains.monster',
+  'https://mesto-react.nomoredomains.monster/sign-up',
+  'http://mesto-react.nomoredomains.monster/sign-up',
 ];
 const corsOptions = {
   origin(origin, callback) {
@@ -57,13 +56,12 @@ app.post('/signup', userValidation, createUser);
 app.use('/users', auth, require('./routes/users'));
 app.use('/cards', auth, require('./routes/cards'));
 
-app.use(errorLogger);
-
-app.use(errors());
-
 app.use('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
+
+app.use(errorLogger);
+app.use(errors());
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

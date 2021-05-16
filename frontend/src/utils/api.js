@@ -79,7 +79,7 @@ class Api {
             })
     }
     changeLikeCardStatus(cardId, isLiked) {
-        return fetch(`${this._url}cards/likes/${cardId}`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: isLiked ? 'PUT' : 'DELETE',
             headers: this._headers
         })
@@ -110,7 +110,7 @@ class Api {
 export const api = new Api({
     url: 'https://api.mesto-react.nomoredomains.monster/',
     headers: {
-        authorization: `Bearer ${localStorage.getItem('token')}`,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
     }
 });
