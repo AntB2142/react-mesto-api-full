@@ -21,24 +21,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-const whitelist = [
-  'http://localhost:3000',
-  'https://mesto-react.nomoredomains.monster/sign-up',
-  'http://mesto-react.nomoredomains.monster/sign-up',
-];
-const corsOptions = {
-  origin(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 
