@@ -20,12 +20,6 @@ class Auth {
             body: JSON.stringify({password, email})
         })
         .then((res) => this._checkResponse(res))
-        .then((data) => {
-          if (data.token) {
-            localStorage.setItem('token', data.token);
-            return data.token;
-          }
-        })
     };
 
     register(password, email) {
@@ -43,14 +37,12 @@ class Auth {
       return fetch(`${this._url}/users/me`, { 
         method: 'GET', 
         headers: { 
+          'Accept': 'application/json',
           'Content-Type': 'application/json', 
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${token}`,
         }, 
       }) 
       .then((res) => this._checkResponse(res)) 
-        .then(data => { 
-          return data; 
-        }) 
     } 
 };
 

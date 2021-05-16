@@ -35,13 +35,20 @@ function App() {
     const history = useHistory();
 
     useEffect(() => {
-        api
-            .getInitialCards()
-            .then((cardsData) => {
-                setCards(cardsData);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+      if (loggedIn) {
+        api.getUserInfo()
+          .then(res => {
+            setCurrentUser(res);
+          })
+          .catch((err) => console.log(err));
+          
+        api.getInitialCards()
+          .then(res => {
+            setCards(res);
+          })
+          .catch((err) => console.log(err));
+      }
+    }, [loggedIn]);
 
     
     function handleCardLike(card) {
@@ -60,12 +67,6 @@ function App() {
             .catch((err) => console.log(err));
     }
 
-    useEffect(() => {
-        api.getUserInfo().then((userData) => {
-                setCurrentUser(userData);
-            })
-            .catch((err) => console.log(err));
-    }, []);
 
     function handleUpdateAvatar(formData) {
         api.setUserAvatar(formData).then((formData) => {
@@ -134,7 +135,7 @@ function App() {
     function onRegister(password, email) {
       auth.register(password, email)
         .then(data => {
-          if (data.data._id) {
+          if (data) {
             setSuccessRegistration(true);
             setIsInfooTooltipOpen(true);
           }
@@ -167,7 +168,7 @@ function App() {
           })
           .catch(err => console.log(err));
       }
-    }, [history])
+    }, [history, loggedIn])
 
     
     return ( 

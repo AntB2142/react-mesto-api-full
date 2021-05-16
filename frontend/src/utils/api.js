@@ -5,6 +5,7 @@ class Api {
     }
     getInitialCards() {
         return fetch(`${this._url}cards`, {
+                method:"GET",
                 headers: this._headers
             })
             .then(res => {
@@ -20,6 +21,7 @@ class Api {
     }
     getUserInfo() {
         return fetch(`${this._url}users/me`, {
+                method:"GET",
                 headers: this._headers
             })
             .then(res => {
@@ -78,8 +80,8 @@ class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
     }
-    changeLikeCardStatus(cardId, isLiked) {
-        return fetch(`${this._url}/cards/${cardId}/likes`, {
+    changeLikeCardStatus(CardId, isLiked) {
+        return fetch(`${this._url}cards/likes/${CardId}`, {
             method: isLiked ? 'PUT' : 'DELETE',
             headers: this._headers
         })
@@ -108,9 +110,9 @@ class Api {
     }
 }
 export const api = new Api({
-    url: 'https://api.mesto-react.nomoredomains.monster',
+    url: 'https://api.mesto-react.nomoredomains.monster/',
     headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json'
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
     }
-});
+  });

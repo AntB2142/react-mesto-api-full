@@ -64,14 +64,14 @@ module.exports.userUpdateValidation = celebrate({
         .min(2)
         .max(30),
     }),
-  headers: Joi
-    .object()
-    .keys({
-      'content-type': Joi
-        .string()
-        .valid('application/json')
-        .required(),
-    }),
+  // headers: Joi
+  // .object()
+  // .keys({
+  // 'content-type': Joi
+  // .string()
+  // .valid('application/json')
+  //  .required(),
+  // }),
 });
 
 module.exports.avatarUpdateValidation = celebrate({
@@ -88,14 +88,14 @@ module.exports.avatarUpdateValidation = celebrate({
           return helpers.message('Неправильная ссылка на аватар');
         }),
     }),
-  headers: Joi
-    .object()
-    .keys({
-      'content-type': Joi
-        .string()
-        .valid('application/json')
-        .required(),
-    }),
+  // headers: Joi
+  // .object()
+  // .keys({
+  // 'content-type': Joi
+  // .string()
+  // .valid('application/json')
+  // .required(),
+  // }),
 });
 
 module.exports.loginValidation = celebrate({
