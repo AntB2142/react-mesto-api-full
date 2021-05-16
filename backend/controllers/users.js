@@ -107,7 +107,7 @@ module.exports.updateAvatar = (req, res, next) => {
     },
   )
     .orFail(new Error('ValidationError'))
-    .then((user) => res.status(200).send(user.avatar))
+    .then((user) => res.status(200).send(user))
     .catch((err) => errorHandling(err))
     .catch(next);
 };
