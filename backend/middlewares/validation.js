@@ -42,7 +42,7 @@ module.exports.cardValidation = celebrate({
         .string()
         .required()
         .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true })) {
+          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
             return value;
           }
           return helpers.message('Неправильная ссылка на картинку');
@@ -74,7 +74,7 @@ module.exports.avatarUpdateValidation = celebrate({
         .string()
         .required()
         .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true })) {
+          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
             return value;
           }
           return helpers.message('Неправильная ссылка на аватар');
