@@ -19,7 +19,7 @@ module.exports.userValidation = celebrate({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
       avatar: Joi.string().custom((value, helpers) => {
-        if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
+        if (validator.isURL(value, { require_protocol: true })) {
           return value;
         }
         return helpers.message('Неправильная ссылка на аватар');
@@ -42,7 +42,7 @@ module.exports.cardValidation = celebrate({
         .string()
         .required()
         .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
+          if (validator.isURL(value, { require_protocol: true })) {
             return value;
           }
           return helpers.message('Неправильная ссылка на картинку');
@@ -64,14 +64,6 @@ module.exports.userUpdateValidation = celebrate({
         .min(2)
         .max(30),
     }),
-  // headers: Joi
-  // .object()
-  // .keys({
-  // 'content-type': Joi
-  // .string()
-  // .valid('application/json')
-  //  .required(),
-  // }),
 });
 
 module.exports.avatarUpdateValidation = celebrate({
@@ -82,20 +74,12 @@ module.exports.avatarUpdateValidation = celebrate({
         .string()
         .required()
         .custom((value, helpers) => {
-          if (validator.isURL(value, { require_protocol: true, disallow_auth: true })) {
+          if (validator.isURL(value, { require_protocol: true })) {
             return value;
           }
           return helpers.message('Неправильная ссылка на аватар');
         }),
     }),
-  // headers: Joi
-  // .object()
-  // .keys({
-  // 'content-type': Joi
-  // .string()
-  // .valid('application/json')
-  // .required(),
-  // }),
 });
 
 module.exports.loginValidation = celebrate({
