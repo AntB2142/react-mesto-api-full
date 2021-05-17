@@ -6,7 +6,9 @@ class Api {
     getInitialCards() {
         return fetch(`${this._url}cards`, {
                 method:"GET",
-                headers: this._headers
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
+                  },
             })
             .then(res => {
                 if (res.ok) {
@@ -22,7 +24,9 @@ class Api {
     getUserInfo() {
         return fetch(`${this._url}users/me`, {
                 method:"GET",
-                headers: this._headers
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
+                  },
             })
             .then(res => {
                 if (res.ok) {
@@ -113,6 +117,6 @@ export const api = new Api({
     url: 'https://api.mesto-react.nomoredomains.monster/',
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     }
   });

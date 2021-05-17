@@ -44,11 +44,11 @@ function App() {
           
         api.getInitialCards()
           .then(res => {
-            setCards(res);
+            setCards(res);    
           })
           .catch((err) => console.log(err));
-      }
-    }, [loggedIn]);
+    }
+    }, [history, loggedIn]);
 
     
     function handleCardLike(card) {
@@ -138,6 +138,7 @@ function App() {
           if (data) {
             setSuccessRegistration(true);
             setIsInfooTooltipOpen(true);
+            
           }
         })
         .catch(err => console.log(err));   
@@ -156,8 +157,7 @@ function App() {
   
     useEffect(() => {
       const token = localStorage.getItem('token');
-  
-      if (token) {
+         if (token) {
         auth.getContent(token)
           .then(res => {
             if (res) {
