@@ -35,20 +35,21 @@ function App() {
     const history = useHistory();
 
     useEffect(() => {
-      if (loggedIn) {
-        api.getUserInfo()
+      const token = localStorage.getItem('token');
+      if (token) {
+        api.getUserInfo(token)
           .then(res => {
             setCurrentUser(res);
           })
           .catch((err) => console.log(err));
           
-        api.getInitialCards()
+        api.getInitialCards(token)
           .then(res => {
             setCards(res);    
           })
           .catch((err) => console.log(err));
     }
-    }, [history, loggedIn]);
+    }, [loggedIn]);
 
     
     function handleCardLike(card) {
@@ -119,10 +120,12 @@ function App() {
       auth.login(password, email)
         .then(data => {
           if (data.token) {
-            setEmail(email);
-            setLoggedIn(true);
             localStorage.setItem('token', data.token);
+            setLoggedIn(true);
+            setEmail(email);
             history.push('/')
+          } else {
+            localStorage.removeItem('token');
           }
         })
         .catch(err => {
@@ -168,7 +171,7 @@ function App() {
           })
           .catch(err => console.log(err));
       }
-    }, [history, loggedIn])
+    }, [history, loggedIn]);
 
     
     return ( 

@@ -10,9 +10,7 @@ const Login = (props) => {
         if (!email || !password) {
             return;
         } else {
-            props.onLogin(password, email);
-            setEmail('');
-            setPassword('');
+            props.onLogin(password, email);       
         }
     }
 
@@ -39,7 +37,7 @@ const Login = (props) => {
                   placeholder="Пароль" 
                   className="login__input" 
                 />
-                <button onClick={handleLoginSubmit} className="login__button">Войти</button>
+                <button type='submit' onClick={handleLoginSubmit} className="login__button">Войти</button>
             </form>
            
         </section>

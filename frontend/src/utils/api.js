@@ -3,12 +3,10 @@ class Api {
         this._url = url;
         this._headers = headers
     }
-    getInitialCards() {
+    getInitialCards(token) {
         return fetch(`${this._url}cards`, {
                 method:"GET",
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('token')}`,
-                  },
+                headers: {...this._headers, authorization: `Bearer ${token}`},
             })
             .then(res => {
                 if (res.ok) {
@@ -21,12 +19,10 @@ class Api {
                 return result;
             });
     }
-    getUserInfo() {
+    getUserInfo(token) {
         return fetch(`${this._url}users/me`, {
                 method:"GET",
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('token')}`,
-                  },
+                headers: {...this._headers, authorization: `Bearer ${token}`},
             })
             .then(res => {
                 if (res.ok) {
@@ -38,7 +34,6 @@ class Api {
                 console.log(result);
                 return result;
             })
-
     }
     setUserInfo(formData) {
         return fetch(`${this._url}users/me`, {
@@ -110,7 +105,6 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-
     }
 }
 export const api = new Api({
