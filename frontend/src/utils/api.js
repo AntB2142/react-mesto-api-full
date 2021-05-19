@@ -35,10 +35,10 @@ class Api {
                 return result;
             })
     }
-    setUserInfo(formData) {
+    setUserInfo(formData, token) {
         return fetch(`${this._url}users/me`, {
                 method: 'PATCH',
-                headers: this._headers,
+               headers: {...this._headers, authorization: `Bearer ${token}`},
                 body: JSON.stringify({
                     name: formData.name,
                     about: formData.about
@@ -51,10 +51,10 @@ class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
     }
-    addCard(formData) {
+    addCard(formData, token) {
         return fetch(`${this._url}cards`, {
             method: 'POST',
-            headers: this._headers,
+            headers: {...this._headers, authorization: `Bearer ${token}`},
             body: JSON.stringify({
                 name: formData.name,
                 link: formData.link
@@ -67,10 +67,10 @@ class Api {
             return Promise.reject(`Ошибка: ${res.status}`);
         })
 }
-    removeCard(id) {
+    removeCard(id, token) {
         return fetch(`${this._url}cards/${id}`, {
             method: 'DELETE',
-            headers: this._headers
+            headers: {...this._headers, authorization: `Bearer ${token}`}
         })
             .then(res => {
                 if (res.ok) {
@@ -79,10 +79,10 @@ class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
     }
-    changeLikeCardStatus(CardId, isLiked) {
+    changeLikeCardStatus(CardId, isLiked, token) {
         return fetch(`${this._url}cards/${CardId}/likes`, {
             method: isLiked ? 'PUT' : 'DELETE',
-            headers: this._headers
+            headers: {...this._headers, authorization: `Bearer ${token}`}
         })
         .then(res => {
             if (res.ok) {
@@ -91,10 +91,10 @@ class Api {
             return Promise.reject(`Ошибка: ${res.status}`);
         })
     }
-    setUserAvatar(formData) {
+    setUserAvatar(formData,  token) {
         return fetch(`${this._url}users/me/avatar`, {
                 method: 'PATCH',
-                headers: this._headers,
+                headers: {...this._headers, authorization: `Bearer ${token}`},
                 body: JSON.stringify({
                     avatar: formData.avatar
                 })
