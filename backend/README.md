@@ -1,22 +1,18 @@
-# Проект Mesto фронтенд + бэкенд
-
-![React](https://img.shields.io/badge/-React-61daf8?logo=react&logoColor=black)
-![HTML5](https://img.shields.io/badge/-HTML5-e34f26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/-CSS3-1572b6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-f7df1e?logo=javaScript&logoColor=black)
+# Бэкенд для проекта Mesto
 ![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/-MongoDB-56a14b?logo=mongodb&logoColor=white)
 ![Node](https://img.shields.io/badge/-Node.js-469837?logo=Node.js&logoColor=white)
+![JavaScript](https://img.shields.io/badge/-JavaScript-f3de35?logo=javaScript&logoColor=black)
 ![Webpack](https://img.shields.io/badge/-Webpack-99d6f8?logo=webpack&logoColor=black)
 
-## Задача
-* Настроить удаленный сервер на nginx. Задеплоить фронтенд и бэкенд. Выпустить и подключить SSL-сертификат
+## Описание
+Приложение на Express.js. Схемы и модели созданы через Mongoose. Все роуты, кроме `/signup` и `/signin`, защищены. Используется валидация Joi и celebrate.Реализована централизованная обработка ошибок. Настроено логирование запросов и ошибок.
 
 ## Директории
 
 `/routes` — папка с файлами роутера  
 `/controllers` — папка с файлами контроллеров пользователя и карточки   
-`/models` — папка с файлами описания схем пользователя и карточки  
+`/models` — папка с файлами описания схем пользователя и карточки
 
 ## Запуск проекта
 
